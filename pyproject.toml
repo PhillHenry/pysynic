@@ -1,0 +1,26 @@
+[project]
+name = "pysynic"
+version = "0.0.1"
+description = "Helps to generated synthetic data that can be used to test ML models etc"
+authors = [
+  { name = "Phillip Henry", email = "londonjavaman@gmail.com" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.7"
+dependencies = [
+  "requests>2",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/phillhenry/pysynic/"
+
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
