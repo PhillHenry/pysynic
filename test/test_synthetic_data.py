@@ -1,4 +1,4 @@
-from pysynic.synthetic_data import random_from
+from pysynic.synthetic_data import random_from, randomly_null
 
 sample_size = 10
 samples = list(range(sample_size))
@@ -20,6 +20,14 @@ def test_random_from_list_based_on_probabilities():
     for i in range(sample_size * num_samples):
         results.append(random_from(samples))
     check_non_uniform_distribution(results)
+
+
+def test_randomly_null_with_seed():
+    mod = sample_size // 2
+    results = []
+    for i, x in enumerate(samples):
+        results.append(randomly_null(x, i, mod))
+    assert len([x for x in results if x is None]) == sample_size / mod
 
 
 def check_non_uniform_distribution(results: list):
