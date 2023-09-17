@@ -76,6 +76,7 @@ def random_date(seed: int, max_delta: int, start_date: str) -> datetime:
 def random_timestamp(seed: int, max_delta: int, start_date: str) -> datetime:
     """
     Returns a random timestamp within a window.
+    Be careful of daylight saving with this method as DST can cause unexpected results...
     :param seed: Adds determinism if not None
     :param max_delta: The size of the date window in units of days
     :param start_date: The earliest date that can be returned. For example: '1/Jul/2021'
