@@ -61,6 +61,14 @@ def test_random_timestamp():
     assert max(results) < datetime.strptime("1/Aug/2021", DATE_FORMAT)
 
 
+def test_random_timestamp_with_1day_window():
+    results = []
+    for i in range(10000):
+        results.append(random_timestamp(None, 1, START_DATE_STR))
+    assert min(results) >= START_DATE
+    assert max(results) < datetime.strptime("2/Jul/2021", DATE_FORMAT)
+
+
 def check_non_uniform_distribution(results: list):
     counts = set()
     for x in samples:
