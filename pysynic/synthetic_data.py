@@ -5,13 +5,9 @@ import random as random
 def random_from(xs: list, seed: int = None) -> Optional[str]:
     """
     Returns random value from list
-
-    Args:
-        xs (list): list of values
-        seed (int, optional): random number. Defaults to None.
-
-    Returns:
-        Optional[str]: Value from list chosen at random
+    :param xs: list of values
+    :param seed: Ensures some determinism if not None.
+    :return: Value from list chosen at (semi)random
     """
     if len(xs) == 0:
         return None
