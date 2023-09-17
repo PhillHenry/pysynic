@@ -17,7 +17,7 @@ to test your pipelines and machine learning models etc.
 
 
 If you find the code here helpful, then great. 
-It's available on PyPI so just add `pysynic` to your dependency list.
+It's available on [PyPI](https://pypi.org/project/pysynic/) so just add `pysynic` to your dependency list.
 It has no dependencies of its own so you won't have any transitive dependency issues.
 
 # Example
