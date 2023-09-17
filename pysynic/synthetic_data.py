@@ -3,6 +3,7 @@ import random as random
 from datetime import datetime, timedelta
 
 DATE_FORMAT = '%d/%b/%Y'
+SECONDS_IN_DAY = 24 * 3600
 
 
 def random_from(xs: list, seed: int = None) -> Optional[str]:
@@ -41,7 +42,7 @@ def randomly_null(x, seed: int = None, mod=2):
             return x
 
 
-def random_in_range(lower_inc: int, upper_inc: int, seed: int = None) -> int:
+def random_integer_in_range(lower_inc: int, upper_inc: int, seed: int = None) -> int:
     """
     Returns a (semi) random int within a range.
     :param lower_inc: The lowest possible value
@@ -57,13 +58,13 @@ def random_in_range(lower_inc: int, upper_inc: int, seed: int = None) -> int:
         return random.randint(lower_inc, upper_inc)
 
 
-def random_date(seed: int, max_delta: int, start_date: str):
+def random_date(seed: int, max_delta: int, start_date: str) -> datetime:
     """
-    Returns a random date within a window.
+    Returns a random date within an open range.
     :param seed: Adds determinism if not None
-    :param max_delta: The size of the date window in units of days
+    :param max_delta: The total size of the date window in units of days
     :param start_date: The earliest date that can be returned. For example: '1/Jul/2021'
-    :return:
+    :return: a (potentially) random date within the window
     """
     if seed is None:
         n_days = random.randint(0, max_delta)
@@ -71,3 +72,17 @@ def random_date(seed: int, max_delta: int, start_date: str):
         n_days = seed % max_delta
     return datetime.strptime(start_date, DATE_FORMAT) + timedelta(days=n_days)
 
+
+def random_timestamp(seed: int, max_delta: int, start_date: str) -> datetime:
+    """
+    Returns a random timestamp within a window.
+    :param seed: Adds determinism if not None
+    :param max_delta: The size of the date window in units of days
+    :param start_date: The earliest date that can be returned. For example: '1/Jul/2021'
+    :return: a (potentially) random timestamp within the window
+    """
+    if seed is not None:
+        time = timedelta(seconds=seed % SECONDS_IN_DAY)
+    else:
+        time = timedelta(seconds=random.randint(0, SECONDS_IN_DAY - 1))
+    return random_date(seed, max_delta - 1, start_date) + time
