@@ -48,3 +48,9 @@ finally we make some sensible assertions.
 These assertions will be domain specific and we can't tell you what they are 
 but hopefully you can see that with just a few lines of Python we can have large, semi-random
 test data sets.
+
+Note that in this example, the data is the same every time we run it. 
+If you want it to be unpredictable, then don't provide a seed to the PySynic methods 
+(in this case above, don't pass `i` but instead `None`).
+Whether you want an element of determinism or true randomness is up to you. 
+There are arguments for both.

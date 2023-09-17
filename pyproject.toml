@@ -1,6 +1,6 @@
 [project]
 name = "pysynic"
-version = "0.0.3"
+version = "0.0.4"
 description = "Helps to generated synthetic data that can be used to test ML models etc"
 authors = [
   { name = "Phillip Henry", email = "londonjavaman@gmail.com" },
