@@ -1,5 +1,8 @@
 from typing import Optional
 import random as random
+from datetime import datetime, timedelta
+
+DATE_FORMAT = '%d/%b/%Y'
 
 
 def random_from(xs: list, seed: int = None) -> Optional[str]:
@@ -52,4 +55,19 @@ def random_in_range(lower_inc: int, upper_inc: int, seed: int = None) -> int:
         return lower_inc + (seed % delta)
     else:
         return random.randint(lower_inc, upper_inc)
+
+
+def random_date(seed: int, max_delta: int, start_date: str):
+    """
+    Returns a random date within a window.
+    :param seed: Adds determinism if not None
+    :param max_delta: The size of the date window in units of days
+    :param start_date: The earliest date that can be returned. For example: '1/Jul/2021'
+    :return:
+    """
+    if seed is None:
+        n_days = random.randint(0, max_delta)
+    else:
+        n_days = seed % max_delta
+    return datetime.strptime(start_date, DATE_FORMAT) + timedelta(days=n_days)
 

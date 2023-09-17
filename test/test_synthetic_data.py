@@ -1,4 +1,5 @@
-from pysynic.synthetic_data import random_from, randomly_null, random_in_range
+from pysynic.synthetic_data import random_from, randomly_null, random_in_range, random_date, DATE_FORMAT
+from datetime import datetime, timedelta
 
 sample_size = 10
 samples = list(range(sample_size))
@@ -31,15 +32,23 @@ def test_randomly_null_with_seed():
 
 
 def test_random_in_range_probabilistically_distributed():
-    n = 1000
     results = []
     low = 7
     high = 17
-    for i in range(n):
+    for i in range(1000):
         results.append(random_in_range(low, high))
     assert min(results) == low
     assert max(results) == high
     check_non_uniform_distribution(results)
+
+
+def test_random_date():
+    results = []
+    start_date = "1/Jul/2021"
+    for i in range(1000):
+        results.append(random_date(i, 31, start_date))
+    assert min(results) == datetime.strptime(start_date, DATE_FORMAT)
+    assert max(results) == datetime.strptime("31/Jul/2021", DATE_FORMAT)
 
 
 def check_non_uniform_distribution(results: list):
