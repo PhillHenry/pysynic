@@ -28,11 +28,11 @@ def test_random_from_list_based_on_probabilities():
 
 
 def test_randomly_null_with_seed():
-    mod = SAMPLE_SIZE // 2
+    null_every = SAMPLE_SIZE // 2
     results = []
     for i, x in enumerate(SAMPLES):
-        results.append(randomly_null(x, i, mod))
-    assert len([x for x in results if x is None]) == SAMPLE_SIZE / mod
+        results.append(randomly_null(x, i, null_every))
+    assert len([x for x in results if x is None]) == SAMPLE_SIZE / null_every
 
 
 def test_random_in_range_probabilistically_distributed():

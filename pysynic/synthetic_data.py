@@ -21,22 +21,22 @@ def random_from(xs: list, seed: int = None) -> Optional[str]:
     return xs[index]
 
 
-def randomly_null(x, seed: int = None, mod=2):
+def randomly_null(x, seed: int = None, every=2):
     """
     (Semi)randomly turns a value into None
     :param x: The value that will (potentially) become None
     :param seed: An optional value that makes the output deterministic
-    :param mod: The value returned will be None every mod times, either on average or strictly
+    :param every: The value returned will be None every mod times, either on average or strictly
     deterministically depending on the value of seed
     :return: either x or None
     """
     if seed is not None:
-        if seed % mod == 1:
+        if seed % every == 1:
             return None
         else:
             return x
     else:
-        if random.randint(1, mod) == 1:
+        if random.randint(1, every) == 1:
             return None
         else:
             return x
