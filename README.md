@@ -54,3 +54,33 @@ If you want it to be unpredictable, then don't provide a seed to the PySynic met
 (in this case above, don't pass `i` but instead `None`).
 Whether you want an element of determinism or true randomness is up to you. 
 There are arguments for both.
+
+If we were to run the same code in a PySpark shell, we could see that the output looks something like:
+```python
+>>> df.show()
++----------+------------+-------------------+                                   
+|patient_id|disease_code|     admission_date|
++----------+------------+-------------------+
+|         0|        null|2021-07-01 00:00:00|
+|         1|        null|2021-07-02 00:00:00|
+|         2|        null|2021-07-03 00:00:00|
+|         3|      cancer|2021-07-04 00:00:00|
+|         4|      stroke|2021-07-05 00:00:00|
+|         5|        null|2021-07-06 00:00:00|
+|         6|        null|2021-07-07 00:00:00|
+|         7|heart attack|2021-07-08 00:00:00|
+|         8|        null|2021-07-09 00:00:00|
+|         9|        null|2021-07-10 00:00:00|
+|        10|        null|2021-07-11 00:00:00|
+|        11|        null|2021-07-12 00:00:00|
+|        12|      cancer|2021-07-13 00:00:00|
+|        13|      stroke|2021-07-14 00:00:00|
+|        14|        null|2021-07-15 00:00:00|
+|        15|heart attack|2021-07-16 00:00:00|
+|        16|heart attack|2021-07-17 00:00:00|
+|        17|      stroke|2021-07-18 00:00:00|
+|        18|      cancer|2021-07-19 00:00:00|
+|        19|      stroke|2021-07-20 00:00:00|
++----------+------------+-------------------+
+only showing top 20 rows
+```
