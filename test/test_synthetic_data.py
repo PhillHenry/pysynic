@@ -16,8 +16,7 @@ def test_random_from_list_with_seed():
     for i in range(SAMPLE_SIZE * num_samples):
         results.append(random_from(SAMPLES, i))
     assert set(results) == set(SAMPLES)
-    counts = check_uniform_distribution(results, SAMPLES, num_samples)
-    assert len(set(counts)) == 1
+    assert check_uniform_distribution(results, num_samples) == SAMPLES
 
 
 def test_random_from_list_based_on_probabilities():
@@ -73,20 +72,23 @@ def test_random_timestamp_with_1day_window():
 
 
 def check_non_uniform_distribution(results: list):
+    counts = histogram_of(results)
+    assert len(counts) > 1
+
+
+def histogram_of(results: list) -> dict:
     counts = defaultdict(int)
     for x in results:
         count = counts[x]
         counts[x] = count + 1
-    assert len(counts) > 1
-
-
-def check_uniform_distribution(results: list, xs: list, expected_count: int) -> [int]:
-    counts = []
-    for i in xs:
-        count = count_of(i, results)
-        assert count == expected_count
-        counts.append(count)
     return counts
+
+
+def check_uniform_distribution(results: list, expected_count: int) -> []:
+    counts = histogram_of(results)
+    for k, v in counts.items():
+        assert v == expected_count
+    return list(counts.keys())
     
 
 def count_of(seek, xs: list) -> int:
