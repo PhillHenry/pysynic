@@ -56,7 +56,7 @@ Whether you want an element of determinism or true randomness is up to you.
 There are arguments for both.
 
 If we were to run the same code in a PySpark shell, we could see that the output looks something like:
-```python
+```
 >>> df.show()
 +----------+------------+-------------------+                                   
 |patient_id|disease_code|     admission_date|
