@@ -73,7 +73,7 @@ def random_date(seed: int, max_delta: int, start_date: str) -> datetime:
     return datetime.strptime(start_date, DATE_FORMAT) + timedelta(days=n_days)
 
 
-def random_timestamp(seed: int, max_delta: int, start_date: str) -> datetime:
+def random_timestamp(seed: Optional[int], max_delta: int, start_date: str) -> datetime:
     """
     Returns a random timestamp within a window.
     Be careful of daylight saving with this method as DST can cause unexpected results...

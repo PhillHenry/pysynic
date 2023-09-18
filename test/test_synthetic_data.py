@@ -1,9 +1,11 @@
+from collections import defaultdict
+from datetime import datetime
+
 from pysynic.synthetic_data import (random_from, randomly_null, random_integer_in_range,
                                     random_date, DATE_FORMAT, random_timestamp)
-from datetime import datetime, timedelta
 
-sample_size = 10
-samples = list(range(sample_size))
+SAMPLE_SIZE = 10
+SAMPLES = list(range(SAMPLE_SIZE))
 START_DATE_STR = "1/Jul/2021"
 START_DATE = datetime.strptime(START_DATE_STR, DATE_FORMAT)
 
@@ -11,27 +13,27 @@ START_DATE = datetime.strptime(START_DATE_STR, DATE_FORMAT)
 def test_random_from_list_with_seed():
     num_samples = 20
     results = []
-    for i in range(sample_size * num_samples):
-        results.append(random_from(samples, i))
-    assert set(results) == set(samples)
-    counts = check_uniform_distribution(results, samples, num_samples)
+    for i in range(SAMPLE_SIZE * num_samples):
+        results.append(random_from(SAMPLES, i))
+    assert set(results) == set(SAMPLES)
+    counts = check_uniform_distribution(results, SAMPLES, num_samples)
     assert len(set(counts)) == 1
 
 
 def test_random_from_list_based_on_probabilities():
     num_samples = 100
     results = []
-    for i in range(sample_size * num_samples):
-        results.append(random_from(samples))
+    for i in range(SAMPLE_SIZE * num_samples):
+        results.append(random_from(SAMPLES))
     check_non_uniform_distribution(results)
 
 
 def test_randomly_null_with_seed():
-    mod = sample_size // 2
+    mod = SAMPLE_SIZE // 2
     results = []
-    for i, x in enumerate(samples):
+    for i, x in enumerate(SAMPLES):
         results.append(randomly_null(x, i, mod))
-    assert len([x for x in results if x is None]) == sample_size / mod
+    assert len([x for x in results if x is None]) == SAMPLE_SIZE / mod
 
 
 def test_random_in_range_probabilistically_distributed():
@@ -59,6 +61,7 @@ def test_random_timestamp():
         results.append(random_timestamp(None, 31, START_DATE_STR))
     assert min(results) >= START_DATE
     assert max(results) < datetime.strptime("1/Aug/2021", DATE_FORMAT)
+    check_non_uniform_distribution(results)
 
 
 def test_random_timestamp_with_1day_window():
@@ -70,9 +73,10 @@ def test_random_timestamp_with_1day_window():
 
 
 def check_non_uniform_distribution(results: list):
-    counts = set()
-    for x in samples:
-        counts.add(count_of(x, results))
+    counts = defaultdict(int)
+    for x in results:
+        count = counts[x]
+        counts[x] = count + 1
     assert len(counts) > 1
 
 
