@@ -1,10 +1,9 @@
 [project]
 name = "pysynic"
-version = "0.0.6"
+version = "0.0.7"
 description = "Helps to generated synthetic data that can be used to test ML models etc"
 authors = [
-  { name = "Phillip Henry", email = "londonjavaman@gmail.com" },
-  { name = "Christopher Monit", email = "londonjavaman@gmail.com" },
+  { name = "Phillip Henry, Christopher Monit", email = "londonjavaman@gmail.com" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
